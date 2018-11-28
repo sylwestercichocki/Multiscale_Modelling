@@ -51,6 +51,10 @@
             this.DualPhase = new System.Windows.Forms.Button();
             this.SingleGrain = new System.Windows.Forms.Button();
             this.AllGrains = new System.Windows.Forms.Button();
+            this.N = new System.Windows.Forms.TextBox();
+            this.Niter = new System.Windows.Forms.TextBox();
+            this.GenRand = new System.Windows.Forms.Button();
+            this.RunMC = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -260,7 +264,7 @@
             // 
             // AllGrains
             // 
-            this.AllGrains.Location = new System.Drawing.Point(873, 292);
+            this.AllGrains.Location = new System.Drawing.Point(872, 290);
             this.AllGrains.Name = "AllGrains";
             this.AllGrains.Size = new System.Drawing.Size(103, 23);
             this.AllGrains.TabIndex = 22;
@@ -268,11 +272,49 @@
             this.AllGrains.UseVisualStyleBackColor = true;
             this.AllGrains.Click += new System.EventHandler(this.AllGrains_Click);
             // 
+            // N
+            // 
+            this.N.Location = new System.Drawing.Point(836, 423);
+            this.N.Name = "N";
+            this.N.Size = new System.Drawing.Size(100, 20);
+            this.N.TabIndex = 23;
+            // 
+            // Niter
+            // 
+            this.Niter.Location = new System.Drawing.Point(836, 455);
+            this.Niter.Name = "Niter";
+            this.Niter.Size = new System.Drawing.Size(100, 20);
+            this.Niter.TabIndex = 24;
+            // 
+            // GenRand
+            // 
+            this.GenRand.Location = new System.Drawing.Point(942, 423);
+            this.GenRand.Name = "GenRand";
+            this.GenRand.Size = new System.Drawing.Size(75, 23);
+            this.GenRand.TabIndex = 25;
+            this.GenRand.Text = "Random";
+            this.GenRand.UseVisualStyleBackColor = true;
+            this.GenRand.Click += new System.EventHandler(this.GenRand_Click);
+            // 
+            // RunMC
+            // 
+            this.RunMC.Location = new System.Drawing.Point(942, 452);
+            this.RunMC.Name = "RunMC";
+            this.RunMC.Size = new System.Drawing.Size(75, 23);
+            this.RunMC.TabIndex = 26;
+            this.RunMC.Text = "Run MC";
+            this.RunMC.UseVisualStyleBackColor = true;
+            this.RunMC.Click += new System.EventHandler(this.RunMC_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1082, 622);
+            this.Controls.Add(this.RunMC);
+            this.Controls.Add(this.GenRand);
+            this.Controls.Add(this.Niter);
+            this.Controls.Add(this.N);
             this.Controls.Add(this.AllGrains);
             this.Controls.Add(this.SingleGrain);
             this.Controls.Add(this.DualPhase);
@@ -329,6 +371,10 @@
         private System.Windows.Forms.Button DualPhase;
         private System.Windows.Forms.Button SingleGrain;
         private System.Windows.Forms.Button AllGrains;
+        private System.Windows.Forms.TextBox N;
+        private System.Windows.Forms.TextBox Niter;
+        private System.Windows.Forms.Button GenRand;
+        private System.Windows.Forms.Button RunMC;
     }
 }
 

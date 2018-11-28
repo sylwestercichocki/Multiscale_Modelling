@@ -23,6 +23,7 @@ namespace Multiscale_Modeling
         EMPTY,
         GRAIN,
         INCLUSION,
-        SAVED
+        SAVED,
+        MC
     };
 }

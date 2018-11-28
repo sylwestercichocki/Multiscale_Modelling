@@ -15,12 +15,14 @@ namespace Multiscale_Modeling.Control
         private Graphics gr;
         private Brush brush;
         public Simple_grain_growth simple;
+        public MC mc;
         public List<Color> colors;
         private Random rnd = new Random();
         private uint pixel_size;
 
         public Controller()
         {
+            mc = new MC();
             bm = new Bitmap(600, 600);
             gr = Graphics.FromImage(bm);
             brush = new SolidBrush(Color.Black);
@@ -295,6 +297,63 @@ namespace Multiscale_Modeling.Control
                     if (simple.cas.lattice[i, j].Cell_Type == CELL_TYPE.INCLUSION)
                     {
                         gr.FillRectangle(new SolidBrush(Color.White), (i - 1) * pixel_size, (j - 1) * pixel_size, pixel_size, pixel_size);
+                    }
+                }
+            }
+        }
+
+        public void genMC(int n)
+        {
+            mc.generateMC(n);
+            for (int i = 0; i < n; ++i)
+            {
+                colors.Add(Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256)));
+            }
+
+            for (uint i = 1; i < mc.cas.size; ++i)
+            {
+                for (uint j = 1; j < mc.cas.size; ++j)
+                {
+                    //if (mc.cas.lattice[i, j].Cell_Type != CELL_TYPE.INCLUSION)
+                    //{
+                    //    uint id = mc.cas.lattice[i, j].ID;
+                    //    gr.FillRectangle(new SolidBrush(colors[(int)id]), (i - 1) * pixel_size, (j - 1) * pixel_size, pixel_size, pixel_size);
+                    //}
+                    //if (mc.cas.lattice[i, j].Cell_Type == CELL_TYPE.INCLUSION)
+                    //{
+                    //    gr.FillRectangle(new SolidBrush(Color.White), (i - 1) * pixel_size, (j - 1) * pixel_size, pixel_size, pixel_size);
+                    //}
+
+                    if (mc.cas.lattice[i, j].Cell_Type != CELL_TYPE.INCLUSION)
+                    {
+                        uint id = mc.cas.lattice[i, j].ID;
+                        gr.FillRectangle(new SolidBrush(colors[(int)id]), (i - 1) * pixel_size, (j - 1) * pixel_size, pixel_size, pixel_size);
+                    }
+                }
+            }
+        }
+
+        public void updateMC(int iter)
+        {
+            mc.update(iter);
+            for (uint i = 1; i < mc.cas.size; ++i)
+            {
+                for (uint j = 1; j < mc.cas.size; ++j)
+                {
+                    //if (mc.cas.lattice[i, j].Cell_Type != CELL_TYPE.INCLUSION)
+                    //{
+                    //    uint id = mc.cas.lattice[i, j].ID;
+                    //    gr.FillRectangle(new SolidBrush(colors[(int)id]), (i - 1) * pixel_size, (j - 1) * pixel_size, pixel_size, pixel_size);
+                    //}
+                    //if (mc.cas.lattice[i, j].Cell_Type == CELL_TYPE.INCLUSION)
+                    //{
+                    //    gr.FillRectangle(new SolidBrush(Color.White), (i - 1) * pixel_size, (j - 1) * pixel_size, pixel_size, pixel_size);
+                    //}
+
+                    if (mc.cas.lattice[i, j].Cell_Type != CELL_TYPE.INCLUSION)
+                    {
+                        uint id = mc.cas.lattice[i, j].ID;
+                        gr.FillRectangle(new SolidBrush(colors[(int)id]), (i - 1) * pixel_size, (j - 1) * pixel_size, pixel_size, pixel_size);
                     }
                 }
             }

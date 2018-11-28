@@ -143,5 +143,17 @@ namespace Multiscale_Modeling
             controller.allGrains();
             pictureBox1.Image = controller.bm;
         }
+
+        private void GenRand_Click(object sender, EventArgs e)
+        {
+            controller.genMC(Int32.Parse(N.Text));
+            pictureBox1.Image = controller.bm;
+        }
+
+        private void RunMC_Click(object sender, EventArgs e)
+        {
+            controller.updateMC(Int32.Parse(Niter.Text));
+            pictureBox1.Image = controller.bm;
+        }
     }
 }
