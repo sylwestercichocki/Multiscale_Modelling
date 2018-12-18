@@ -55,6 +55,13 @@
             this.Niter = new System.Windows.Forms.TextBox();
             this.GenRand = new System.Windows.Forms.Button();
             this.RunMC = new System.Windows.Forms.Button();
+            this.H_lower = new System.Windows.Forms.TextBox();
+            this.H_higher = new System.Windows.Forms.TextBox();
+            this.DistEn = new System.Windows.Forms.Button();
+            this.Recrystalization = new System.Windows.Forms.Button();
+            this.RecIterations = new System.Windows.Forms.TextBox();
+            this.Morphology = new System.Windows.Forms.RadioButton();
+            this.Energy = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -306,11 +313,83 @@
             this.RunMC.UseVisualStyleBackColor = true;
             this.RunMC.Click += new System.EventHandler(this.RunMC_Click);
             // 
+            // H_lower
+            // 
+            this.H_lower.Location = new System.Drawing.Point(666, 491);
+            this.H_lower.Name = "H_lower";
+            this.H_lower.Size = new System.Drawing.Size(100, 20);
+            this.H_lower.TabIndex = 27;
+            // 
+            // H_higher
+            // 
+            this.H_higher.Location = new System.Drawing.Point(666, 517);
+            this.H_higher.Name = "H_higher";
+            this.H_higher.Size = new System.Drawing.Size(100, 20);
+            this.H_higher.TabIndex = 28;
+            this.H_higher.Text = "0";
+            // 
+            // DistEn
+            // 
+            this.DistEn.Location = new System.Drawing.Point(666, 543);
+            this.DistEn.Name = "DistEn";
+            this.DistEn.Size = new System.Drawing.Size(100, 23);
+            this.DistEn.TabIndex = 29;
+            this.DistEn.Text = "Distribute Energy";
+            this.DistEn.UseVisualStyleBackColor = true;
+            this.DistEn.Click += new System.EventHandler(this.DistEn_Click);
+            // 
+            // Recrystalization
+            // 
+            this.Recrystalization.Location = new System.Drawing.Point(773, 543);
+            this.Recrystalization.Name = "Recrystalization";
+            this.Recrystalization.Size = new System.Drawing.Size(100, 23);
+            this.Recrystalization.TabIndex = 30;
+            this.Recrystalization.Text = "Recrystalization";
+            this.Recrystalization.UseVisualStyleBackColor = true;
+            this.Recrystalization.Click += new System.EventHandler(this.Recrystalization_Click);
+            // 
+            // RecIterations
+            // 
+            this.RecIterations.Location = new System.Drawing.Point(773, 517);
+            this.RecIterations.Name = "RecIterations";
+            this.RecIterations.Size = new System.Drawing.Size(100, 20);
+            this.RecIterations.TabIndex = 31;
+            // 
+            // Morphology
+            // 
+            this.Morphology.AutoSize = true;
+            this.Morphology.Checked = true;
+            this.Morphology.Location = new System.Drawing.Point(650, 595);
+            this.Morphology.Name = "Morphology";
+            this.Morphology.Size = new System.Drawing.Size(80, 17);
+            this.Morphology.TabIndex = 32;
+            this.Morphology.TabStop = true;
+            this.Morphology.Text = "Morphology";
+            this.Morphology.UseVisualStyleBackColor = true;
+            this.Morphology.CheckedChanged += new System.EventHandler(this.Morphology_CheckedChanged);
+            // 
+            // Energy
+            // 
+            this.Energy.AutoSize = true;
+            this.Energy.Location = new System.Drawing.Point(736, 595);
+            this.Energy.Name = "Energy";
+            this.Energy.Size = new System.Drawing.Size(58, 17);
+            this.Energy.TabIndex = 33;
+            this.Energy.Text = "Energy";
+            this.Energy.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1082, 622);
+            this.Controls.Add(this.Energy);
+            this.Controls.Add(this.Morphology);
+            this.Controls.Add(this.RecIterations);
+            this.Controls.Add(this.Recrystalization);
+            this.Controls.Add(this.DistEn);
+            this.Controls.Add(this.H_higher);
+            this.Controls.Add(this.H_lower);
             this.Controls.Add(this.RunMC);
             this.Controls.Add(this.GenRand);
             this.Controls.Add(this.Niter);
@@ -375,6 +454,13 @@
         private System.Windows.Forms.TextBox Niter;
         private System.Windows.Forms.Button GenRand;
         private System.Windows.Forms.Button RunMC;
+        private System.Windows.Forms.TextBox H_lower;
+        private System.Windows.Forms.TextBox H_higher;
+        private System.Windows.Forms.Button DistEn;
+        private System.Windows.Forms.Button Recrystalization;
+        private System.Windows.Forms.TextBox RecIterations;
+        private System.Windows.Forms.RadioButton Morphology;
+        private System.Windows.Forms.RadioButton Energy;
     }
 }
 

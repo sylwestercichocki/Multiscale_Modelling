@@ -155,5 +155,25 @@ namespace Multiscale_Modeling
             controller.updateMC(Int32.Parse(Niter.Text));
             pictureBox1.Image = controller.bm;
         }
+
+        
+
+        private void DistEn_Click(object sender, EventArgs e)
+        {
+            controller.recrystalizationInit(Int32.Parse(H_lower.Text), Int32.Parse(H_higher.Text));
+            pictureBox1.Image = controller.bm;
+        }
+
+        private void Recrystalization_Click(object sender, EventArgs e)
+        {
+            controller.recrystalization(Int32.Parse(RecIterations.Text));
+            pictureBox1.Image = controller.bm;
+        }
+
+        private void Morphology_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Morphology.Checked) pictureBox1.Image = controller.bm;
+            else pictureBox1.Image = controller.energyBm;
+        }
     }
 }

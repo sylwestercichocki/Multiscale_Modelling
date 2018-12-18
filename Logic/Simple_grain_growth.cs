@@ -12,13 +12,14 @@ namespace Multiscale_Modeling.Logic
         public uint xsize;
         public uint ysize;
         public uint size;
-        public Cellular_automata_space cas;
-        public uint current_id;
+        static public Cellular_automata_space cas;
+        static public uint current_id;
         public List<uint> selectedGrainsId;
         public List<int[]> boundaryCoord;
 
         public Simple_grain_growth()
         {
+            
             cas = new Cellular_automata_space();
             size = cas.size;
             current_id = 1;
@@ -29,12 +30,26 @@ namespace Multiscale_Modeling.Logic
         {
             cas = new Cellular_automata_space(s);
             size = s;
-            current_id = 1;
+            current_id = 2;
             selectedGrainsId = new List<uint>();
         }
 
         public void SetSeeds(int numOfSeeds)
         {
+
+            for(int i = 0; i < size; ++i)
+            {
+                for(int j = 0; j < size; ++j)
+                {
+                    if(i==0 || j == 0 || i==(size -1)  || j == (size - 1))
+                    {
+                        cas.lattice[i, j].Cell_Type = CELL_TYPE.EMPTY;
+                        cas.lattice[i, j].ID = 0;
+                    }
+                }
+            }
+
+
             Random rnd = new Random();
             for (int i = 0; i < numOfSeeds; ++i)
             {
