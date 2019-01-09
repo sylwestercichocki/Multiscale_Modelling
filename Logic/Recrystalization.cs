@@ -72,31 +72,40 @@ namespace Multiscale_Modeling.Logic
 
         public void addNewNuclei(int n, bool onBoundaries=false)
         {
+            int j = 0;
             Random rnd = new Random();
             for (int i = 0; i < n; ++i)
             {
                 int x, y;
-                if (onBoundaries)
+                do
                 {
-                    while (true)
+                    ++j;
+                    if (onBoundaries)
+                    {
+                        while (true)
+                        {
+                            x = rnd.Next(1, checked((int)Simple_grain_growth.cas.size - 1));
+                            y = rnd.Next(1, checked((int)Simple_grain_growth.cas.size - 1));
+                            if (boundary(x, y)) break;
+                        }
+                    }
+                    else
                     {
                         x = rnd.Next(1, checked((int)Simple_grain_growth.cas.size - 1));
                         y = rnd.Next(1, checked((int)Simple_grain_growth.cas.size - 1));
-                        if (boundary(x, y)) break;
                     }
-                }
-                else
-                {
-                    x = rnd.Next(1, checked((int)Simple_grain_growth.cas.size - 1));
-                    y = rnd.Next(1, checked((int)Simple_grain_growth.cas.size - 1));
-                }
-               
-                
+                    if (j > 5000) break;
+                } while (Simple_grain_growth.cas.lattice[x, y].recrystalized);
+
+
+
                 if (!Simple_grain_growth.cas.lattice[x, y].recrystalized)
                 {
                     Simple_grain_growth.cas.lattice[x, y].recrystalized = true;
                     Simple_grain_growth.cas.lattice[x, y].H = 0;
                     Simple_grain_growth.cas.lattice[x, y].rec_ID = currentRecID;
+                    int newid = rnd.Next(0, (int)Simple_grain_growth.current_id);
+                    //Simple_grain_growth.cas.lattice[x, y].ID = (uint)newid;
                     ++currentRecID;
                 }
             }
@@ -138,27 +147,32 @@ namespace Multiscale_Modeling.Logic
             return temp;
         }
 
-        public void compute(int n)
+        public void compute(int n, int nNuclei, bool onBeginning, bool onBoundaries, bool increasing)
         {
+            bool beg = true;
+            if (onBeginning && beg) { addNewNuclei(nNuclei, onBoundaries); beg = false; }
             for(int i = 0; i < n; ++i)
             {
                 t.Shuffle();
+                t.Shuffle();
+                if (!onBeginning) addNewNuclei(nNuclei, onBoundaries);
+                if (increasing) nNuclei *= 2;
                 for(int j = 0; j < t.Count; ++j)
                 {
-                    if (Simple_grain_growth.cas.lattice[t[j][0], t[j][1]].recrystalized) continue;
+                    //if (Simple_grain_growth.cas.lattice[t[j][0], t[j][1]].recrystalized) continue;
                     List<int[]> recNeighboorsID = rec_neighboor(t[j][0], t[j][1]);
                     if (recNeighboorsID.Count == 0) continue;
                     int r = rnd.Next(0, recNeighboorsID.Count);
                     int oldEnergy = calcEnergy(t[j][0], t[j][1], true);
                     uint oldID = Simple_grain_growth.cas.lattice[t[j][0], t[j][1]].ID;
 
-                    int newid = rnd.Next(0, (int)Simple_grain_growth.current_id);
-                    //Simple_grain_growth.cas.lattice[t[j][0], t[j][1]].ID =
-                    //    Simple_grain_growth.cas.lattice[recNeighboorsID[r][0], recNeighboorsID[r][1]].ID;
-                    Simple_grain_growth.cas.lattice[t[j][0], t[j][1]].ID = (uint)newid;
+                    //int newid = rnd.Next(0, (int)Simple_grain_growth.current_id);
+                    Simple_grain_growth.cas.lattice[t[j][0], t[j][1]].ID =
+                        Simple_grain_growth.cas.lattice[recNeighboorsID[r][0], recNeighboorsID[r][1]].ID;
+                    //Simple_grain_growth.cas.lattice[t[j][0], t[j][1]].ID = (uint)newid;
                     int energy = calcEnergy(t[j][0], t[j][1], false);
 
-                    if (energy <= oldEnergy)
+                    if (energy < oldEnergy)
                     {
                         Simple_grain_growth.cas.lattice[t[j][0], t[j][1]].H = 0;
                         Simple_grain_growth.cas.lattice[t[j][0], t[j][1]].recrystalized = true;

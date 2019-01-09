@@ -166,7 +166,8 @@ namespace Multiscale_Modeling
 
         private void Recrystalization_Click(object sender, EventArgs e)
         {
-            controller.recrystalization(Int32.Parse(RecIterations.Text));
+
+            controller.recrystalization(Int32.Parse(RecIterations.Text), Int32.Parse(numOfRecNuclei.Text),onBeginning.Checked, onBoundaries.Checked, Increasing.Checked);
             pictureBox1.Image = controller.bm;
         }
 

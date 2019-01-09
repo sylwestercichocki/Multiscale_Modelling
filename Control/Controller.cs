@@ -378,7 +378,6 @@ namespace Multiscale_Modeling.Control
             
 
             rec.distEnergy(h_lower, h_higher);
-            rec.addNewNuclei(100);
 
             for (int i = 0; i < rec.currentRecID; ++i)
             {
@@ -425,10 +424,14 @@ namespace Multiscale_Modeling.Control
 
         }
 
-        public void recrystalization(int n)
+        public void recrystalization(int n, int nNuclei, bool onBeginning, bool onBoundaries, bool increasing)
         {
-            rec.compute(n);
+            rec.compute(n, nNuclei, onBeginning, onBoundaries, increasing);
 
+            for (int i = 0; i < rec.currentRecID; ++i)
+            {
+                rec_colors.Add(Color.FromArgb(rnd.Next(246) + 10, rnd.Next(0), rnd.Next(0)));
+            }
 
             for (uint i = 1; i < Simple_grain_growth.cas.size; ++i)
             {
